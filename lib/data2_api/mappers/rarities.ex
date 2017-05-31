@@ -3,7 +3,6 @@ defmodule Dota2API.Mappers.Rarities do
   Rarities mapper.
   """
 
-  alias HTTPoison.Response
   alias Dota2API.Models.Rarity
 
   @get_rarities_url "http://api.steampowered.com/IEconDOTA2_570/GetRarities/v1"
@@ -21,11 +20,9 @@ defmodule Dota2API.Mappers.Rarities do
   """
   # @sepc load(String.t) :: {:ok, [Rarity.t], integer}
   def load(language \\ "en") do
-    {:ok, %Response{body: body}} = Utils.Request.load(
+    result = Utils.Request.load(
       @get_rarities_url, [language: language]
-    )
-
-    result = Poison.decode!(body)["result"]
+    )["result"]
 
     {:ok, Rarity.build_from(list: result["rarities"]), result["count"]}
   end

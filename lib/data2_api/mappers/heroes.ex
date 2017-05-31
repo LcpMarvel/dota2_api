@@ -3,7 +3,6 @@ defmodule Dota2API.Mappers.Heroes do
   Heroes mapper.
   """
 
-  alias HTTPoison.Response
   alias Dota2API.Models.Hero
 
   @get_heroes_url "http://api.steampowered.com/IEconDOTA2_570/GetHeroes/v1"
@@ -21,15 +20,13 @@ defmodule Dota2API.Mappers.Heroes do
   """
   @spec load(String.t, boolean) :: {:ok, [Hero], integer}
   def load(language \\ "en", itemizedonly \\ false) do
-    {:ok, %Response{body: body}} = Utils.Request.load(
+    result = Utils.Request.load(
       @get_heroes_url,
       [
         language: language,
         itemizedonly: itemizedonly
       ]
-    )
-
-    result = Poison.decode!(body)["result"]
+    )["result"]
 
     {:ok, Hero.build_from(list: result["heroes"]), result["count"]}
   end

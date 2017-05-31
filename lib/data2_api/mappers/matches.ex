@@ -5,11 +5,37 @@ defmodule Dota2API.Mappers.Matches do
 
   @type param :: {atom, String.t | integer}
 
-  alias HTTPoison.Response
   alias Dota2API.Models.Match
   alias Dota2API.Enums.GameMode
 
   @get_matches_url "http://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v1"
+
+  @doc """
+  Get all matches by heroes.
+
+  ## Example
+
+      iex> {:ok, heroes, _count} = Dota2API.Mappers.Heroes.load
+      iex> [first_hero|_] = heroes
+      iex> matches = Dota2API.Mappers.Matches.all_matches(275477134, hero_ids: [first_hero.id])
+      iex> List.first(matches).__struct__ == Dota2API.Models.Match
+      true
+  """
+  @spec all_matches(integer, hero_ids: [integer]) :: [Match.t]
+  def all_matches(account_id, hero_ids: hero_ids) do
+    load_by_hero_id = fn(hero_id) ->
+      case load(account_id: account_id, hero_id: hero_id) do
+        {:ok, _, _, _, match_digests} ->
+          match_digests
+        _ ->
+          []
+      end
+    end
+
+    hero_ids
+      |> Enum.map(load_by_hero_id)
+      |> List.flatten
+  end
 
   @doc """
   Get all matches.
@@ -22,11 +48,9 @@ defmodule Dota2API.Mappers.Matches do
   """
   @spec load([param]) :: {:ok, integer, integer, integer, [Match.t]} | {:error, String.t}
   def load(opts \\ []) do
-    {:ok, %Response{body: body}} = Utils.Request.load(
+    result = Utils.Request.load(
       @get_matches_url, request_params(opts)
-    )
-
-    result = Poison.decode!(body)["result"]
+    )["result"]
 
     case result["status"] do
       1 ->
