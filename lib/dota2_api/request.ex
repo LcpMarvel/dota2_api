@@ -7,7 +7,7 @@ defmodule Dota2API.Request do
   def load(url, params) do
     dota2_api_key =
       case Keyword.get(params, :key) do
-        nil -> Application.fetch_env!(:dota2_api, :key)
+        nil -> Dota2API.ApiKey.get
         key -> key
       end
 
