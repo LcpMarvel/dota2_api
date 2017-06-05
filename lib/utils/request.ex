@@ -5,8 +5,15 @@ defmodule Utils.Request do
 
   @spec load(String.t, params) :: map | no_return
   def load(url, params) do
+    dota2_api_key =
+      case Keyword.get(params, :key) do
+        nil -> Application.fetch_env!(:dota2_api, :key)
+        key -> key
+      end
+
     options = [
-      params: [key: Application.fetch_env!(:dota2_api, :key)] ++ params
+      ssl: [{:versions, [:'tlsv1.2']}],
+      params: [key: dota2_api_key] ++ params
     ]
 
     {:ok, %Response{status_code: status, body: body}} = HTTPoison.get(url, [], options)

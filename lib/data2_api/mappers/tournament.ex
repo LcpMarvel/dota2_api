@@ -6,9 +6,9 @@ defmodule Dota2API.Mappers.Tournament do
   @get_prize_pool_url "http://api.steampowered.com/IEconDOTA2_570/GetTournamentPrizePool/v1"
 
   @spec prize_pool(integer | nil) :: {:ok, integer, integer, integer}
-  def prize_pool(league_id \\ nil) do
+  def prize_pool(league_id \\ nil, key \\ nil) do
     result = Utils.Request.load(
-      @get_prize_pool_url, [league_id: league_id]
+      @get_prize_pool_url, [league_id: league_id, key: key]
     )["result"]
 
     {

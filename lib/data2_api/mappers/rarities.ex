@@ -19,9 +19,9 @@ defmodule Dota2API.Mappers.Rarities do
       true
   """
   # @sepc load(String.t) :: {:ok, [Rarity.t], integer}
-  def load(language \\ "en") do
+  def load(language \\ "en", key \\ nil) do
     result = Utils.Request.load(
-      @get_rarities_url, [language: language]
+      @get_rarities_url, [language: language, key: key]
     )["result"]
 
     {:ok, Rarity.build_from(list: result["rarities"]), result["count"]}

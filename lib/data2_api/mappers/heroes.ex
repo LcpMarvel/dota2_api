@@ -19,12 +19,13 @@ defmodule Dota2API.Mappers.Heroes do
       true
   """
   @spec load(String.t, boolean) :: {:ok, [Hero], integer}
-  def load(language \\ "en", itemizedonly \\ false) do
+  def load(language \\ "en", itemizedonly \\ false, key \\ nil) do
     result = Utils.Request.load(
       @get_heroes_url,
       [
         language: language,
-        itemizedonly: itemizedonly
+        itemizedonly: itemizedonly,
+        key: key
       ]
     )["result"]
 

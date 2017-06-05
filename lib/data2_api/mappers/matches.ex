@@ -77,7 +77,8 @@ defmodule Dota2API.Mappers.Matches do
       league_id: opts[:league_id],
       start_at_match_id: opts[:start_at_match_id],
       matches_requested: opts[:matches_requested],
-      tournament_games_only: opts[:tournament_games_only]
+      tournament_games_only: opts[:tournament_games_only],
+      key: opts[:key]
     ] |> Enum.filter(fn({_, value}) -> value end)
 
     # skill ignored if an account is specified
