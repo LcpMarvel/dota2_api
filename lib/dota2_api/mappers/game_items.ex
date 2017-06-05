@@ -17,7 +17,7 @@ defmodule Dota2API.Mappers.GameItems do
   """
   @spec load(String.t) :: {:ok, [GameItem]}
   def load(language \\ "en", key \\ nil) do
-    result = Utils.Request.load(
+    result = Dota2API.Request.load(
       @get_game_items_url, [language: language, key: key]
     )["result"]
 

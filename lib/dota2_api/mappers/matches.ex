@@ -48,7 +48,7 @@ defmodule Dota2API.Mappers.Matches do
   """
   @spec load([param]) :: {:ok, integer, integer, integer, [Match.t]} | {:error, String.t}
   def load(opts \\ []) do
-    result = Utils.Request.load(
+    result = Dota2API.Request.load(
       @get_matches_url, request_params(opts)
     )["result"]
 

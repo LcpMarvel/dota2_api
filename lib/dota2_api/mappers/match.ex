@@ -9,7 +9,7 @@ defmodule Dota2API.Mappers.Match do
 
   # @spec load(integer | String.t) :: {:ok, Match.t}
   def load(match_id, key \\ nil) do
-    result = Utils.Request.load(
+    result = Dota2API.Request.load(
       @get_match_url, [match_id: match_id, key: key]
     )["result"]
 

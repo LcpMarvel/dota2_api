@@ -1,4 +1,4 @@
-defmodule Utils.Request do
+defmodule Dota2API.Request do
   @type params :: [{atom, any}]
 
   alias HTTPoison.Response

@@ -7,7 +7,7 @@ defmodule Dota2API.Mappers.Tournament do
 
   @spec prize_pool(integer | nil) :: {:ok, integer, integer, integer}
   def prize_pool(league_id \\ nil, key \\ nil) do
-    result = Utils.Request.load(
+    result = Dota2API.Request.load(
       @get_prize_pool_url, [league_id: league_id, key: key]
     )["result"]
 

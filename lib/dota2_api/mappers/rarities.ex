@@ -20,7 +20,7 @@ defmodule Dota2API.Mappers.Rarities do
   """
   # @sepc load(String.t) :: {:ok, [Rarity.t], integer}
   def load(language \\ "en", key \\ nil) do
-    result = Utils.Request.load(
+    result = Dota2API.Request.load(
       @get_rarities_url, [language: language, key: key]
     )["result"]
 
