@@ -27,7 +27,14 @@ defmodule Dota2API.Enums.GameMode do
       12 -> __MODULE__.LeastPlayed
       13 -> __MODULE__.NewPlayerPool
       14 -> __MODULE__.CompendiumMatchmaking
+      15 -> __MODULE__.Custom
       16 -> __MODULE__.CaptainDraft
+      17 -> __MODULE__.BalancedDraft
+      18 -> __MODULE__.AbilityDraft
+      19 -> __MODULE__.UnknownEvent
+      20 -> __MODULE__.AllRandomDeathMatch
+      21 -> __MODULE__.SoloMid
+      22 -> __MODULE__.RankedAllPick
 
       _ -> nil
     end
@@ -169,11 +176,74 @@ defmodule Dota2API.Enums.GameMode.CompendiumMatchmaking do
   end
 end
 
+defmodule Dota2API.Enums.GameMode.Custom do
+  alias Dota2API.Enums.GameMode
+  @behaviour GameMode
+
+  def value do
+    %GameMode{ value: 15, name: "Custom" }
+  end
+end
+
 defmodule Dota2API.Enums.GameMode.CaptainDraft do
   alias Dota2API.Enums.GameMode
   @behaviour GameMode
 
   def value do
     %GameMode{ value: 16, name: "Captain's Draft" }
+  end
+end
+
+defmodule Dota2API.Enums.GameMode.BalancedDraft do
+  alias Dota2API.Enums.GameMode
+  @behaviour GameMode
+
+  def value do
+    %GameMode{ value: 17, name: 'Balanced Draft' }
+  end
+end
+
+defmodule Dota2API.Enums.GameMode.AbilityDraft do
+  alias Dota2API.Enums.GameMode
+  @behaviour GameMode
+
+  def value do
+    %GameMode{ value: 18, name: 'Ability Draft' }
+  end
+end
+
+defmodule Dota2API.Enums.GameMode.UnknownEvent do
+  alias Dota2API.Enums.GameMode
+  @behaviour GameMode
+
+  def value do
+    %GameMode{ value: 19, name: '?? Event ??' }
+  end
+end
+
+defmodule Dota2API.Enums.GameMode.AllRandomDeathMatch do
+  alias Dota2API.Enums.GameMode
+  @behaviour GameMode
+
+  def value do
+    %GameMode{ value: 20, name: 'All Random Death Match' }
+  end
+end
+
+defmodule Dota2API.Enums.GameMode.SoloMid do
+  alias Dota2API.Enums.GameMode
+  @behaviour GameMode
+
+  def value do
+    %GameMode{ value: 21, name: '1vs1 Solo Mid' }
+  end
+end
+
+defmodule Dota2API.Enums.GameMode.RankedAllPick do
+  alias Dota2API.Enums.GameMode
+  @behaviour GameMode
+
+  def value do
+    %GameMode{ value: 22, name: 'Ranked All Pick' }
   end
 end
