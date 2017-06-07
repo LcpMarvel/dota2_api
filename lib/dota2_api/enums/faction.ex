@@ -3,7 +3,7 @@ defmodule Dota2API.Enums.Faction do
     name: String.t
   }
 
-  defstruct [:name]
+  defstruct [:value, :name]
 
   @callback value :: t
 end
@@ -13,7 +13,7 @@ defmodule Dota2API.Enums.Faction.Radiant do
   @behaviour Faction
 
   def value do
-    %Faction{ name: "Radiant" }
+    %Faction{ value: 0, name: "Radiant" }
   end
 end
 
@@ -22,6 +22,6 @@ defmodule Dota2API.Enums.Faction.Dire do
   @behaviour Faction
 
   def value do
-    %Faction{ name: "Dire" }
+    %Faction{ value: 1, name: "Dire" }
   end
 end
