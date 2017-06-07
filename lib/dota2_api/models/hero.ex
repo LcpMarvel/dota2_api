@@ -3,6 +3,7 @@ defmodule Dota2API.Models.Hero do
     id: integer,
     name: String.t,
     hero_name: String.t,
+    localized_name: String.t,
     avatars: [
       small_horizontal: String.t,
       large_orizontal: String.t,
@@ -10,7 +11,7 @@ defmodule Dota2API.Models.Hero do
       full_quality_vertical: String.t
     ]
   }
-  defstruct [:id, :name, :hero_name, :avatars]
+  defstruct [:id, :name, :hero_name, :localized_name, :avatars]
 
   @hero_name_prefix "npc_dota_hero_"
   @avatar_base_url "http://cdn.dota2.com/apps/dota2/images/heroes/"
@@ -31,6 +32,7 @@ defmodule Dota2API.Models.Hero do
       id: dict["id"],
       name: name,
       hero_name: hero_name,
+      localized_name: dict["localized_name"],
       avatars: [
         small_horizontal: url <> "sb.png",
         large_orizontal: url <> "lg.png",
