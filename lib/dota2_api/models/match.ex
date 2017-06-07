@@ -10,8 +10,8 @@ defmodule Dota2API.Models.Match do
   alias Dota2API.Mappers.Match
 
   @type t :: %__MODULE__{
-    match_id: integer,
-    match_sequence_number: integer,
+    match_id: String.t,
+    match_sequence_number: String.t,
     players: [Player.t],
     season: String.t,
     winner: [Dota2API.Enums.Faction.t],
@@ -55,8 +55,8 @@ defmodule Dota2API.Models.Match do
 
   def build_digest_from(dict) do
     %__MODULE__{
-      match_id: dict["match_id"],
-      match_sequence_number: dict["match_seq_num"],
+      match_id: Integer.to_string(dict["match_id"]),
+      match_sequence_number: Integer.to_string(dict["match_seq_num"]),
       started_at: dict["start_time"],
       lobby_type: LobbyType.get(dict["lobby_type"]),
       players: Player.build_digest_from(list: dict["players"])
@@ -65,8 +65,8 @@ defmodule Dota2API.Models.Match do
 
   def build_from(dict) do
     %__MODULE__{
-      match_id: dict["match_id"],
-      match_sequence_number: dict["match_seq_num"],
+      match_id: Integer.to_string(dict["match_id"]),
+      match_sequence_number: Integer.to_string(dict["match_seq_num"]),
       players: Player.build_from(list: dict["players"]),
       season: dict["season"],
       winner: if(dict["radiant_win"], do: Radiant, else: Dire),
