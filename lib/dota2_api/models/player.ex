@@ -3,7 +3,7 @@ defmodule Dota2API.Models.Player do
   alias Dota2API.Models.AbilityUpgrade
 
   @type t :: %__MODULE__{
-    account_id: integer,
+    account_id: String.t,
     player_slot: String.t,
     hero_id: integer,
     items: [integer],
@@ -41,7 +41,7 @@ defmodule Dota2API.Models.Player do
 
   def build_digest_from(dict) do
     %__MODULE__{
-      account_id: dict["account_id"],
+      account_id: Integer.to_string(dict["account_id"]),
       player_slot: player_slot(dict["player_slot"]),
       hero_id: dict["hero_id"]
     }
@@ -54,7 +54,7 @@ defmodule Dota2API.Models.Player do
 
   def build_from(dict) do
     %__MODULE__{
-      account_id: dict["account_id"],
+      account_id: Integer.to_string(dict["account_id"]),
       player_slot: player_slot(dict["player_slot"]),
       hero_id: dict["hero_id"],
       items: [
