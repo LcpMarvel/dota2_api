@@ -8,7 +8,7 @@ defmodule Dota2API.Models.Player do
     hero_id: integer,
     items: [integer],
     backpack_items: [integer],
-    skills_count: integer,
+    kills_count: integer,
     deaths_count: integer,
     assists_count: integer,
     leaver_status: LeaverStatus.t,
@@ -27,7 +27,7 @@ defmodule Dota2API.Models.Player do
 
   defstruct [
     :account_id, :player_slot, :hero_id, :items, :backpack_items,
-    :skills_count, :deaths_count, :assists_count,
+    :kills_count, :deaths_count, :assists_count,
     :leaver_status, :last_hits_count, :denies_count,
     :gold, :gold_per_minute, :experience_per_minute,
     :gold_spent, :hero_damage, :tower_damage, :hero_healing,
@@ -64,7 +64,7 @@ defmodule Dota2API.Models.Player do
       backpack_items: [
         dict["backpack_0"], dict["backpack_1"], dict["backpack_2"]
       ],
-      skills_count: dict["kills"],
+      kills_count: dict["kills"],
       deaths_count: dict["deaths"],
       assists_count: dict["assists"],
       leaver_status: LeaverStatus.get(dict["leaver_status"]),
