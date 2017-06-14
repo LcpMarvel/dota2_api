@@ -1,4 +1,4 @@
-defmodule Dota2API.Models.GameItem do
+defmodule Dota2API.Model.GameItem do
   @game_item_prefix "item_"
   @image_base_url "http://cdn.dota2.com/apps/dota2/images/items/"
 

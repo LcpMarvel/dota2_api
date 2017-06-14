@@ -1,4 +1,4 @@
-defmodule Dota2API.Mappers.HeroesTest do
+defmodule Dota2API.Mapper.HeroesTest do
   use ExUnit.Case
-  doctest Dota2API.Mappers.Heroes
+  doctest Dota2API.Mapper.Heroes
 end

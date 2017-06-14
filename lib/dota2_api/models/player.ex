@@ -1,6 +1,7 @@
-defmodule Dota2API.Models.Player do
-  alias Dota2API.Enums.LeaverStatus
-  alias Dota2API.Models.AbilityUpgrade
+defmodule Dota2API.Model.Player do
+  alias Dota2API.Enum.LeaverStatus
+
+  alias Dota2API.Model.AbilityUpgrade
 
   @type t :: %__MODULE__{
     account_id: String.t,
@@ -11,7 +12,7 @@ defmodule Dota2API.Models.Player do
     kills_count: integer,
     deaths_count: integer,
     assists_count: integer,
-    leaver_status: LeaverStatus.t,
+    leaver_status: atom,
     last_hits_count: integer,
     denies_count: integer,
     gold: integer,
@@ -67,7 +68,7 @@ defmodule Dota2API.Models.Player do
       kills_count: dict["kills"],
       deaths_count: dict["deaths"],
       assists_count: dict["assists"],
-      leaver_status: LeaverStatus.get(dict["leaver_status"]),
+      leaver_status: LeaverStatus.key(dict["leaver_status"]),
       last_hits_count: dict["last_hits"],
       denies_count: dict["denies"],
       gold: dict["gold"],

@@ -1,20 +1,18 @@
-defmodule Dota2API.Models.Match do
-  alias Dota2API.Models.Player
-  alias Dota2API.Models.PickBan
+defmodule Dota2API.Model.Match do
+  alias Dota2API.Model.Player
+  # alias Dota2API.Model.PickBan
 
-  alias Dota2API.Enums.Faction.Radiant
-  alias Dota2API.Enums.Faction.Dire
-  alias Dota2API.Enums.LobbyType
-  alias Dota2API.Enums.GameMode
+  alias Dota2API.Enum.LobbyType
+  alias Dota2API.Enum.GameMode
 
-  alias Dota2API.Mappers.Match
+  alias Dota2API.Mapper.Match
 
   @type t :: %__MODULE__{
     match_id: String.t,
     match_sequence_number: String.t,
     players: [Player.t],
     season: String.t,
-    winner: [Dota2API.Enums.Faction.t],
+    winner: :atom,
     duration: integer,
     started_at: integer,
     tower_status_of_radiant: String.t,
@@ -28,8 +26,8 @@ defmodule Dota2API.Models.Match do
     league_id: integer,
     positive_votes_count: integer,
     negative_votes_count: integer,
-    game_mode: GameMode.t,
-    picks_bans: PickBan.t,
+    game_mode: atom,
+    picks_bans: atom,
     flags: integer,
     engine: integer,
     radiant_score: integer,
@@ -58,7 +56,7 @@ defmodule Dota2API.Models.Match do
       match_id: Integer.to_string(dict["match_id"]),
       match_sequence_number: Integer.to_string(dict["match_seq_num"]),
       started_at: dict["start_time"],
-      lobby_type: LobbyType.get(dict["lobby_type"]),
+      lobby_type: LobbyType.key(dict["lobby_type"]),
       players: Player.build_digest_from(list: dict["players"])
     }
   end
@@ -69,7 +67,7 @@ defmodule Dota2API.Models.Match do
       match_sequence_number: Integer.to_string(dict["match_seq_num"]),
       players: Player.build_from(list: dict["players"]),
       season: dict["season"],
-      winner: if(dict["radiant_win"], do: Radiant, else: Dire),
+      winner: if(dict["radiant_win"], do: :radiant, else: :dire),
       duration: dict["duration"],
       started_at: dict["start_time"],
       tower_status_of_radiant: tower_status(dict["tower_status_radiant"]),
@@ -78,13 +76,13 @@ defmodule Dota2API.Models.Match do
       barracks_status_of_dire: barrack_status(dict["barracks_status_dire"]),
       server_cluster: dict["cluster"],
       first_blood_occurred_at: dict["first_blood_time"],
-      lobby_type: LobbyType.get(dict["lobby_type"]),
+      lobby_type: LobbyType.key(dict["lobby_type"]),
       human_players_count: dict["human_players"],
       league_id: dict["leagueid"],
       positive_votes_count: dict["positive_votes"],
       negative_votes_count: dict["negative_votes"],
-      game_mode: GameMode.get(dict["game_mode"]),
-      # picks_bans: TODO
+      game_mode: GameMode.key(dict["game_mode"]),
+      picks_bans: [],
       flags: dict["flags"],
       engine: dict["engine"],
       radiant_score: dict["radiant_score"],

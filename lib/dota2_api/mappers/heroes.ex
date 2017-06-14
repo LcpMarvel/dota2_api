@@ -1,9 +1,9 @@
-defmodule Dota2API.Mappers.Heroes do
+defmodule Dota2API.Mapper.Heroes do
   @moduledoc """
   Heroes mapper.
   """
 
-  alias Dota2API.Models.Hero
+  alias Dota2API.Model.Hero
 
   @get_heroes_url "http://api.steampowered.com/IEconDOTA2_570/GetHeroes/v1"
 
@@ -12,8 +12,8 @@ defmodule Dota2API.Mappers.Heroes do
 
   ## Example
 
-      iex> {:ok, heroes, count} = Dota2API.Mappers.Heroes.load
-      iex> List.first(heroes).__struct__ == Dota2API.Models.Hero
+      iex> {:ok, heroes, count} = Dota2API.Mapper.Heroes.load
+      iex> List.first(heroes).__struct__ == Dota2API.Model.Hero
       true
       iex> count > 0
       true

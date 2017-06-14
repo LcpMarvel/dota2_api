@@ -1,4 +1,4 @@
-defmodule Dota2API.Models.PickBan do
+defmodule Dota2API.Model.PickBan do
   @type t :: %__MODULE__{
     hero_id: integer,
     is_pick: boolean,

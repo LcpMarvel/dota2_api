@@ -1,8 +1,8 @@
-defmodule Dota2API.Mappers.GameItems do
+defmodule Dota2API.Mapper.GameItems do
   @moduledoc """
   Game items mapper.
   """
-  alias Dota2API.Models.GameItem
+  alias Dota2API.Model.GameItem
 
   @get_game_items_url "http://api.steampowered.com/IEconDOTA2_570/GetGameItems/v1"
 
@@ -11,8 +11,8 @@ defmodule Dota2API.Mappers.GameItems do
 
   ## Example
 
-      iex> {:ok, items} = Dota2API.Mappers.GameItems.load
-      iex> List.first(items).__struct__ == Dota2API.Models.GameItem
+      iex> {:ok, items} = Dota2API.Mapper.GameItems.load
+      iex> List.first(items).__struct__ == Dota2API.Model.GameItem
       true
   """
   @spec load(String.t) :: {:ok, [GameItem]}

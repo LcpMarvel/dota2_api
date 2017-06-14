@@ -1,4 +1,4 @@
-defmodule Dota2API.Models.Rarity do
+defmodule Dota2API.Model.Rarity do
   @type t :: %__MODULE__{
     id: integer,
     name: String.t,

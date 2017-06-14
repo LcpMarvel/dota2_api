@@ -1,12 +1,12 @@
-defmodule Dota2API.Mappers.Matches do
+defmodule Dota2API.Mapper.Matches do
   @moduledoc """
   Match mapper.
   """
 
   @type param :: {atom, String.t | integer}
 
-  alias Dota2API.Models.Match
-  alias Dota2API.Enums.GameMode
+  alias Dota2API.Model.Match
+  alias Dota2API.Enum.GameMode
 
   @get_matches_url "http://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v1"
 
@@ -15,10 +15,10 @@ defmodule Dota2API.Mappers.Matches do
 
   ## Example
 
-      iex> {:ok, heroes, _count} = Dota2API.Mappers.Heroes.load
+      iex> {:ok, heroes, _count} = Dota2API.Mapper.Heroes.load
       iex> [first_hero|_] = heroes
-      iex> matches = Dota2API.Mappers.Matches.all_matches(275477134, hero_ids: [first_hero.id])
-      iex> List.first(matches).__struct__ == Dota2API.Models.Match
+      iex> matches = Dota2API.Mapper.Matches.all_matches(275477134, hero_ids: [first_hero.id])
+      iex> List.first(matches).__struct__ == Dota2API.Model.Match
       true
   """
   @spec all_matches(integer, hero_ids: [integer]) :: [Match.t]
@@ -42,8 +42,8 @@ defmodule Dota2API.Mappers.Matches do
 
   ## Example
 
-      iex> {:ok, _number_of_results, _total_results, _results_remaining, matches} = Dota2API.Mappers.Matches.load
-      iex> List.first(matches).__struct__ == Dota2API.Models.Match
+      iex> {:ok, _number_of_results, _total_results, _results_remaining, matches} = Dota2API.Mapper.Matches.load
+      iex> List.first(matches).__struct__ == Dota2API.Model.Match
       true
   """
   @spec load([param]) :: {:ok, integer, integer, integer, [Match.t]} | {:error, String.t}
@@ -71,7 +71,7 @@ defmodule Dota2API.Mappers.Matches do
   def request_params(opts) do
     params = [
       hero_id: opts[:hero_id],
-      game_mode: GameMode.get(opts[:game_mode]),
+      game_mode: GameMode.key(opts[:game_mode]),
       min_players: opts[:min_players],
       account_id: opts[:account_id],
       league_id: opts[:league_id],

@@ -1,4 +1,4 @@
-defmodule Dota2API.Models.Hero do
+defmodule Dota2API.Model.Hero do
   @type t :: %__MODULE__{
     id: integer,
     name: String.t,

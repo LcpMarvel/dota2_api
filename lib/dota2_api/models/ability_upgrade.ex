@@ -1,4 +1,4 @@
-defmodule Dota2API.Models.AbilityUpgrade do
+defmodule Dota2API.Model.AbilityUpgrade do
   @type t :: %__MODULE__{
     ability_id: integer,
     upgraded_at: integer,

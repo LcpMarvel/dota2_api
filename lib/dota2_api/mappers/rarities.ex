@@ -1,9 +1,9 @@
-defmodule Dota2API.Mappers.Rarities do
+defmodule Dota2API.Mapper.Rarities do
   @moduledoc """
   Rarities mapper.
   """
 
-  alias Dota2API.Models.Rarity
+  alias Dota2API.Model.Rarity
 
   @get_rarities_url "http://api.steampowered.com/IEconDOTA2_570/GetRarities/v1"
 
@@ -12,8 +12,8 @@ defmodule Dota2API.Mappers.Rarities do
 
   ## Example
 
-      iex> {:ok, rarities, count} = Dota2API.Mappers.Rarities.load
-      iex> List.first(rarities).__struct__ == Dota2API.Models.Rarity
+      iex> {:ok, rarities, count} = Dota2API.Mapper.Rarities.load
+      iex> List.first(rarities).__struct__ == Dota2API.Model.Rarity
       true
       iex> count > 0
       true

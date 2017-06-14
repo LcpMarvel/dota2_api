@@ -1,4 +1,4 @@
-defmodule Dota2API.Mappers.Tournament do
+defmodule Dota2API.Mapper.Tournament do
   @moduledoc """
   Tournament mapper.
   """

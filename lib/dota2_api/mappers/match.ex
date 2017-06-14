@@ -1,9 +1,9 @@
-defmodule Dota2API.Mappers.Match do
+defmodule Dota2API.Mapper.Match do
   @moduledoc """
   Match mapper.
   """
 
-  alias Dota2API.Models.Match
+  alias Dota2API.Model.Match
 
   @get_match_url "http://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/v1"
 
