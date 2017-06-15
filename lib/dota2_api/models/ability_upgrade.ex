@@ -7,6 +7,9 @@ defmodule Dota2API.Model.AbilityUpgrade do
 
   defstruct [:ability_id, :upgraded_at, :level]
 
+  def build_from(list: nil) do
+    []
+  end
   def build_from(list: list) do
     list
       |> Enum.map(&__MODULE__.build_from/1)

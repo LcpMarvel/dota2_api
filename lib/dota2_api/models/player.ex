@@ -2,11 +2,14 @@ defmodule Dota2API.Model.Player do
   alias Dota2API.Enum.LeaverStatus
 
   alias Dota2API.Model.AbilityUpgrade
+  alias Dota2API.Enum.Faction
 
   @type t :: %__MODULE__{
     account_id: String.t,
     player_slot: String.t,
     hero_id: integer,
+    team: atom,
+    position: integer,
     items: [integer],
     backpack_items: [integer],
     kills_count: integer,
@@ -27,8 +30,8 @@ defmodule Dota2API.Model.Player do
   }
 
   defstruct [
-    :account_id, :player_slot, :hero_id, :items, :backpack_items,
-    :kills_count, :deaths_count, :assists_count,
+    :account_id, :player_slot, :hero_id, :team, :position, :items,
+    :backpack_items, :kills_count, :deaths_count, :assists_count,
     :leaver_status, :last_hits_count, :denies_count,
     :gold, :gold_per_minute, :experience_per_minute,
     :gold_spent, :hero_damage, :tower_damage, :hero_healing,
@@ -48,16 +51,23 @@ defmodule Dota2API.Model.Player do
     }
   end
 
+  def build_from(list: nil) do
+    []
+  end
   def build_from(list: list) do
     list
       |> Enum.map(&__MODULE__.build_from/1)
   end
 
   def build_from(dict) do
+    player_slot = player_slot(dict["player_slot"])
+
     %__MODULE__{
       account_id: Integer.to_string(dict["account_id"]),
-      player_slot: player_slot(dict["player_slot"]),
+      player_slot: player_slot,
       hero_id: dict["hero_id"],
+      team: team(player_slot),
+      position: position(player_slot),
       items: [
         dict["item_0"], dict["item_1"], dict["item_2"],
         dict["item_3"], dict["item_4"], dict["item_5"]
@@ -89,5 +99,23 @@ defmodule Dota2API.Model.Player do
     number
       |> Integer.to_string(2)
       |> String.rjust(8, ?0)
+  end
+
+  @spec team(binary) :: atom
+  def team(player_slot) do
+    {team, _} = String.split_at(player_slot, 1)
+
+    team
+      |> String.to_integer
+      |> Faction.key
+  end
+
+  @spec position(binary) :: integer
+  def position(player_slot) do
+    {_, binary} = String.split_at(player_slot, -3)
+
+    {value, _} = Integer.parse(binary, 2)
+
+    value
   end
 end

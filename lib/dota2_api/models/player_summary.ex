@@ -39,6 +39,9 @@ defmodule Dota2API.Model.PlayerSummary do
   ]
 
   @spec build_from(list: [map]) :: [t]
+  def build_from(list: nil) do
+    []
+  end
   def build_from(list: list) when is_list(list) do
     list
       |> Enum.map(&build_from/1)

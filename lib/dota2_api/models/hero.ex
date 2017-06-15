@@ -16,6 +16,9 @@ defmodule Dota2API.Model.Hero do
   @hero_name_prefix "npc_dota_hero_"
   @avatar_base_url "http://cdn.dota2.com/apps/dota2/images/heroes/"
 
+  def build_from(list: nil) do
+    []
+  end
   def build_from(list: list) do
     list
       |> Enum.map(&__MODULE__.build_from/1)

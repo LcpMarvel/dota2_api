@@ -7,7 +7,15 @@ defmodule Dota2API.Mapper.Match do
 
   @get_match_url "http://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/v1"
 
-  # @spec load(integer | String.t) :: {:ok, Match.t}
+  @doc """
+  Get a match.
+
+  ## Example
+
+      iex> {:ok, match} = Dota2API.Mapper.Match.load(3238315497)
+      iex> match.__struct__ == Dota2API.Model.Match
+      true
+  """
   def load(match_id, key \\ nil) do
     result = Dota2API.Request.load(
       @get_match_url, [match_id: match_id, key: key]

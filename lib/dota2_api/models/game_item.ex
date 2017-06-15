@@ -15,6 +15,9 @@ defmodule Dota2API.Model.GameItem do
 
   defstruct [:id, :name, :cost, :secret_shop, :side_shop, :recipe, :localized_name, :image]
 
+  def build_from(list: nil) do
+    []
+  end
   def build_from(list: list) do
     list
       |> Enum.map(&__MODULE__.build_from/1)

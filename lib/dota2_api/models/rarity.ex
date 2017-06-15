@@ -9,6 +9,9 @@ defmodule Dota2API.Model.Rarity do
 
   defstruct [:id, :name, :order, :color, :localized_name]
 
+  def build_from(list: nil) do
+    []
+  end
   def build_from(list: list) do
     list
       |> Enum.map(&__MODULE__.build_from/1)
