@@ -24,7 +24,7 @@ defmodule Dota2API.Request do
       403 ->
         raise "Forbidden, You have to set dota2 API key."
       429 ->
-        raise Dota2API.TooManyRequestsError, [url: url, params: params]
+        raise Dota2API.TooManyRequestsError, "Too Many Requests"
     end
   end
 end
