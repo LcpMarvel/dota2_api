@@ -12,7 +12,7 @@ defmodule Dota2API.Mapper.Match do
 
   ## Example
 
-      iex> {:ok, match} = Dota2API.Mapper.Match.load(3238315497)
+      iex> {:ok, match} = Dota2API.Mapper.Match.load(3241475535)
       iex> match.__struct__ == Dota2API.Model.Match
       true
   """

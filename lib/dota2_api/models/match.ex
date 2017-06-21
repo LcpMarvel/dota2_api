@@ -1,6 +1,6 @@
 defmodule Dota2API.Model.Match do
   alias Dota2API.Model.Player
-  # alias Dota2API.Model.PickBan
+  alias Dota2API.Model.PickBan
 
   alias Dota2API.Enum.LobbyType
   alias Dota2API.Enum.GameMode
@@ -82,7 +82,7 @@ defmodule Dota2API.Model.Match do
       positive_votes_count: dict["positive_votes"],
       negative_votes_count: dict["negative_votes"],
       game_mode: GameMode.key(dict["game_mode"]),
-      picks_bans: [],
+      picks_bans: PickBan.build_from(list: dict["picks_bans"]),
       flags: dict["flags"],
       engine: dict["engine"],
       radiant_score: dict["radiant_score"],
