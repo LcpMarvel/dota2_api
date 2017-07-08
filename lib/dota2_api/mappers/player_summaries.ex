@@ -18,7 +18,7 @@ defmodule Dota2API.Mapper.PlayerSummaries do
       iex> player_summary.__struct__ == Dota2API.Model.PlayerSummary
       true
   """
-  @spec batch_load([SteamIdConversion.steam32], String.t | nil) :: [PlayerSummary.t]
+  @spec batch_load([SteamIdConversion.steam32], String.t | nil) :: {:ok, [PlayerSummary.t]}
   def batch_load(account_ids, key \\ nil) when is_list(account_ids) do
     steam64_ids =
       account_ids
@@ -41,10 +41,13 @@ defmodule Dota2API.Mapper.PlayerSummaries do
       iex> player_summary.__struct__ == Dota2API.Model.PlayerSummary
       true
   """
-  @spec load(SteamIdConversion.steam32, String.t | nil) :: PlayerSummary.t
+  @spec load(SteamIdConversion.steam32, String.t | nil) :: {:ok, PlayerSummary.t} | {:error, String.t}
   def load(account_id, key \\ nil) do
-    {:ok, [player_summary]} = batch_load([account_id], key)
-
-    {:ok, player_summary}
+    case batch_load([account_id], key) do
+      {:ok, [player_summary]} ->
+        {:ok, player_summary}
+      {:ok, []} ->
+        {:error, "Not Found"}
+    end
   end
 end
