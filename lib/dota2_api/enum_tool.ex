@@ -27,6 +27,11 @@ defmodule EnumTool do
       def enum do
         unquote(enum)
       end
+
+      def raw_values(keys) do
+        keys
+          |> Enum.map(&raw_value/1)
+      end
     end
   end
 end

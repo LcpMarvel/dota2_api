@@ -26,4 +26,9 @@ defmodule Dota2API.Enum.GameMode do
     solo_mid: 21,
     ranked_all_pick: 22
   )
+
+  @spec ranked_modes :: [atom]
+  def ranked_modes do
+    [:ranked_all_pick, :captain_draft, :random_draft]
+  end
 end
