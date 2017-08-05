@@ -12,7 +12,6 @@ defmodule Dota2API.Request do
       end
 
     options = [
-      ssl: ["versions", "tlsv1.2"],
       params: [key: dota2_api_key] ++ params
     ]
 

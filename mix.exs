@@ -32,7 +32,7 @@ defmodule Dota2API.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:httpoison, "~> 0.11.1"},
+      {:httpoison, "~> 0.12"},
       {:poison, "~> 2.0 or ~> 3.0"},
       {:timex, "~> 3.0"}
     ]
